@@ -207,8 +207,6 @@
                 'Authorization: Bearer '.$this->getAccessToken()
             ], 'json');
 
-            echo '<pre>';
-            print_r($retorno);
-
+            return $retorno;
         }
     }
