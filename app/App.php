@@ -35,7 +35,7 @@
             $_SESSION['expiresIn'] = $_SESSION['createdTime']+$this->getTokenData()['expires'];
         }
 
-        private function getExpirateionTime() {
+        private function getExpirationTime() {
             return $this->expiresIn;
         }
 
@@ -66,7 +66,7 @@
         {
             $now = time();
 
-            if ($now >= $this->getExpirateionTime()) {
+            if ($now >= $this->getExpirationTime()) {
                 return true;
             }
 
