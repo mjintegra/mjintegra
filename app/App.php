@@ -3,7 +3,7 @@
 
     class App
     {
-        private $apiUrl = 'http://localhost/clientes/api-junior';
+        private $apiUrl = 'https://api.mjintegra.com';
         protected $authString;
         protected $grantString;
 
