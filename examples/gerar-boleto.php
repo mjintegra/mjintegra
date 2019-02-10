@@ -77,7 +77,8 @@
 
 
     //Recebendo objeto para os Requests do Boleto
-    $boletoRequest = $mj->boletoRequest($seller_id, $amount);
+    $boletoRequest = new MJIntegra\BoletoRequest();
+    $boletoRequest->setSellerId($seller_id)->setAmount($amount);
     $boletoRequest->setCustomer($customer)->setBoleto($boleto);
 
     //requisição da geração do boleto

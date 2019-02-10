@@ -6,10 +6,21 @@
 
     class BoletoRequest
     {
+        protected $paymentId;
         protected $seller_id;
         protected $amount;
         protected $customer;
         protected $boleto;
+
+        public function setPaymentId($paymentId)
+        {
+            $this->paymentId = $paymentId;
+        }
+
+        public function getPaymentId()
+        {
+            return $this->paymentId;
+        }
 
         public function setSellerId($seller_id)
         {

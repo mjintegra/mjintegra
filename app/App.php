@@ -3,7 +3,7 @@
 
     class App
     {
-        private $apiUrl = 'https://api.mjintegra.com';
+        private $apiUrl = 'http://localhost/clientes/api-junior';
         protected $authString;
         protected $grantString;
 
@@ -117,16 +117,6 @@
         }
 
 
-        public function boletoRequest($seller_id, $amount)
-        {
-            $boletoRequest = new BoletoRequest();
-            $boletoRequest->setSellerId($seller_id);
-            $boletoRequest->setAmount($amount);
-
-            return $boletoRequest;
-        }
-
-
         public function boletoGenerate(BoletoRequest $boletoRequest) {
             $seller_id = $boletoRequest->getSellerId();
             $amount = $boletoRequest->getAmount();
@@ -204,6 +194,37 @@
             $endpoint = $this->apiUrl.'/v1/boleto/generate';
             $retorno = $this->sendRequest($endpoint, $data, [
                 'Content-Type:application/json',
+                'Authorization: Bearer '.$this->getAccessToken()
+            ], 'json');
+
+            return $retorno;
+        }
+
+
+        public function boletoQuery(BoletoRequest $boletoRequest)
+        {
+            $endpoint = $this->apiUrl.'/v1/boleto/query';
+
+            $retorno = $this->sendRequest($endpoint, [
+                'payment_id' => $boletoRequest->getPaymentId(),
+                'seller_id' => $boletoRequest->getSellerId()
+            ], [
+                'Content-Type: application/json',
+                'Authorization: Bearer '.$this->getAccessToken()
+            ], 'json');
+
+            return $retorno;
+        }
+
+        public function boletoDischarge(BoletoRequest $boletoRequest)
+        {
+            $endpoint = $this->apiUrl.'/v1/boleto/discharge';
+
+            $retorno = $this->sendRequest($endpoint, [
+                'payment_id' => $boletoRequest->getPaymentId(),
+                'seller_id' => $boletoRequest->getSellerId()
+            ], [
+                'Content-Type: application/json',
                 'Authorization: Bearer '.$this->getAccessToken()
             ], 'json');
 
